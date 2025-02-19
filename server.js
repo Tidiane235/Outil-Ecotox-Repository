@@ -7,14 +7,6 @@
 
 
 const {Pool} = require("pg")
-const pool = new Pool({
-    "user": "tidiane",
-    "password" : "zeSBcwnhHJXUCzKcE3SUo5eVe7FB8YIC",
-    "host" : "dpg-cuqpt5l6l47c73cgsarg-a.oregon-postgres.render.com",
-    "port" : 5432,
-    "database" : "data_outil_ecotox_postgresql"
-})
-
 
 app.get("/", (req, res) => res.sendFile('https://tidiane235.github.io/Outil-Ecotox-Repository/pages/dashboards/index.html'))
 
