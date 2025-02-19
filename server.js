@@ -43,10 +43,7 @@ start()
 async function start() {
     await connect(); 
 const todos = await readTodos("SQL_Liste_generale");
-    console.log('TEST',todos)
-     res.setHeader("content-type", "application/json")  
-     res.send(JSON.stringify(todos)) 
-
+    console.log('TEST2',todos)
 }
 
 async function connect() {
@@ -57,6 +54,14 @@ async function connect() {
         console.error(`Une erreur de connexion avec la base de données est survenue. ${e}`)
     }
 }
+
+
+app.get("/SQL_Liste_generale", async (req, res) => {
+    const rows = await readTodos("SQL_Liste_generale");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
 
 
 async function readTodos(table) {
