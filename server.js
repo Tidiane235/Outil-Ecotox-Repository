@@ -8,7 +8,7 @@
 
 const {Pool} = require("pg")
 
-app.get("/", (req, res) => res.sendFile('https://tidiane235.github.io/Outil-Ecotox-Repository/pages/dashboards/index.html'))
+
 
 const express = require('express');
 const app = express();
@@ -21,7 +21,7 @@ dotenv.config();
 
 const itemsPool = require('./DBConfig.js')
 
-
+app.get("/", (req, res) => res.sendFile('https://tidiane235.github.io/Outil-Ecotox-Repository/pages/dashboards/index.html'))
 app.get('/', (req, res) => {
     res.send('Test : OUTIL ECOTOX4 : Simple API homepage');
 })
