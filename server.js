@@ -21,9 +21,9 @@ dotenv.config();
 
 const itemsPool = require('./DBConfig.js')
 
-app.get("/", (req, res) => res.sendFile('https://tidiane235.github.io/Outil-Ecotox-Repository/pages/dashboards/index.html'))
+//app.get("/", (req, res) => res.sendFile('https://tidiane235.github.io/Outil-Ecotox-Repository/pages/dashboards/index.html'))
 app.get('/', (req, res) => {
-    res.send('Test : OUTIL ECOTOX5 : Simple API homepage');
+    res.send('Test : OUTIL ECOTOX6 : Simple API homepage');
 })
 
 
@@ -43,7 +43,7 @@ start()
 async function start() {
     await connect(); 
 const todos = await readTodos("SQL_Liste_generale");
-    console.log(todos)
+    console.log('TEST',todos)
 
 }
 
