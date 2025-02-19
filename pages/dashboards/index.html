@@ -3399,7 +3399,7 @@ while (i < 10) {
       
       try{
          
-          fetch("http://localhost:8090/" + table_SQL)
+          fetch("https://outil-ecotox-repository-api2.onrender.com/" + table_SQL)
            .then((response) => response.json())
            .then((tableau)=> {
       
@@ -6652,7 +6652,7 @@ ligne_tableau.cas  === NORMALISER_CAS(ligne.cas_composé)
       
       try{
          
-          fetch("http://localhost:8090/" + table_SQL)
+          fetch("https://outil-ecotox-repository-api2.onrender.com/" + table_SQL)
            .then((response) => response.json())
            .then((tableau)=> {
       
@@ -7667,7 +7667,7 @@ ligne_tableau.cas  === NORMALISER_CAS(ligne.cas_composé)
               //--------------Insertion des nouvelles données par l'utilisateur
               
               //-------------
-              let result = await fetch("http://localhost:8090/todos", {method: "POST", 
+              let result = await fetch("https://outil-ecotox-repository-api2.onrender.com/", {method: "POST", 
               headers: {"content-type": "application/json"}, body: JSON.stringify(jsonRequest) })
               result = await result.json();
               console.log("Résultat de l'insertion : ", result )
@@ -7729,7 +7729,7 @@ ligne_tableau.cas  === NORMALISER_CAS(ligne.cas_composé)
               jsonRequest.new  =  nouveau
       
            //-------------
-           let result = await fetch("http://localhost:8090/modification", {method: "POST", 
+           let result = await fetch("https://outil-ecotox-repository-api2.onrender.com/modification", {method: "POST", 
              
               headers: {"content-type": "application/json"}, body: JSON.stringify(jsonRequest) })
               result = await result.json();
@@ -7823,7 +7823,7 @@ ligne_tableau.cas  === NORMALISER_CAS(ligne.cas_composé)
         console.log('supression req :', jsonRequest)
       
       //-------------
-      let result = await fetch("http://localhost:8090/suppression", {method: "POST", 
+      let result = await fetch("http://outil-ecotox-repository-api2.onrender.com/suppression", {method: "POST", 
         headers: {"content-type": "application/json"}, body: JSON.stringify(jsonRequest) })
         result = await result.json();
         console.log("Résultat de la suppression: ", result )
