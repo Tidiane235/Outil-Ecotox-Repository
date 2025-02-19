@@ -23,7 +23,7 @@ const itemsPool = require('./DBConfig.js')
 
 app.get("/", (req, res) => res.sendFile(__dirname + '/pages/dashboards/index.html'))
 app.get('/', (req, res) => {
-    res.send('Test : OUTIL ECOTOX1 : Simple API homepage');
+    res.send('Test : OUTIL ECOTOX12 : Simple API homepage');
 })
 
 
@@ -56,7 +56,7 @@ async function connect() {
 }
 
 
-app.get("https://outil-ecotox-repository-api2.onrender.com/SQL_Liste_generale", async (req, res) => {
+app.get("/SQL_Liste_generale", async (req, res) => {
     const rows = await readTodos("SQL_Liste_generale");
     res.setHeader("content-type", "application/json")  
     res.send(JSON.stringify(rows)) 
