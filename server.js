@@ -30,7 +30,7 @@ const itemsPool = require('./DBConfig.js')
 
 
 app.get('/', (req, res) => {
-    res.send('Test : OUTIL ECOTOX : Simple API homepage');
+    res.send('Test : OUTIL ECOTOX2 : Simple API homepage');
 })
 
 app.get("/SQL_Liste_generale", async (req, res) => {
@@ -66,4 +66,16 @@ app.get('/api/SQL_Liste_generale', async(req, res) => {
 app.listen(5070, () => {
     console.log("Test : Server running on port 5070");
 })
+
+async function readTodos(table) {
+    try {
+        
+     const results = await pool.query("SELECT * FROM public." + table );
+    return results.rows;
+   
+    }
+    catch(e){
+        return [];
+    }
+}
 
