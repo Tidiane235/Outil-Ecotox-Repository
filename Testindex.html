@@ -29,6 +29,27 @@
 
     <script >
         console.log("test page HTML")
+
+        
+            Importation = {}
+      
+            function IMPORTER(TABLE_DATA) {
+            try{
+         
+           fetch("https://outil-ecotox-repository-api2.onrender.com/" + TABLE_DATA)
+            .then((response) => response.json())
+            .then((tableau_importation)=> {
+      
+           Importation[TABLE_DATA] = tableau_importation
+            console.log(TABLE_DATA, tableau_importation)
+          
+          })
+              }
+      
+              catch(e){ result.success= "Échec de l'importation"}
+            
+            }
+            IMPORTER("SQL_Liste_generale")
       </script> 
 </body>
 
