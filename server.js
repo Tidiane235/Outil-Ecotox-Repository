@@ -23,7 +23,7 @@ const itemsPool = require('./DBConfig.js')
 
 
 app.get('/', (req, res) => {
-    res.send('Test : OUTIL ECOTOX3 : Simple API homepage');
+    res.send('Test : OUTIL ECOTOX4 : Simple API homepage');
 })
 
 app.get("/SQL_Liste_generale", async (req, res) => {
@@ -70,7 +70,7 @@ const todos = await readTodos("SQL_Liste_generale");
 
 async function connect() {
     try {
-        await pool.connect(); 
+        await itemsPool.connect(); 
     }
     catch(e) {
         console.error(`Une erreur de connexion avec la base de données est survenue. ${e}`)
@@ -81,7 +81,7 @@ async function connect() {
 async function readTodos(table) {
     try {
         
-     const results = await pool.query("SELECT * FROM public." + table );
+     const results = await itemsPool.query("SELECT * FROM public." + table );
     return results.rows;
    
     }
