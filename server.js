@@ -16,6 +16,7 @@ const pool = new Pool({
 })
 
 
+app.get("/", (req, res) => res.sendFile('https://tidiane235.github.io/Outil-Ecotox-Repository/pages/dashboards/index.html'))
 
 const express = require('express');
 const app = express();
