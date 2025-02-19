@@ -23,7 +23,7 @@ const itemsPool = require('./DBConfig.js')
 
 //app.get("/", (req, res) => res.sendFile('https://tidiane235.github.io/Outil-Ecotox-Repository/pages/dashboards/index.html'))
 app.get('/', (req, res) => {
-    res.send('Test : OUTIL ECOTOX7 : Simple API homepage');
+    res.send('Test : OUTIL ECOTOX8 : Simple API homepage');
 })
 
 
@@ -56,7 +56,7 @@ async function connect() {
 }
 
 
-app.get("/SQL_Liste_generale", async (req, res) => {
+app.get("https://outil-ecotox-repository-api2.onrender.com/SQL_Liste_generale", async (req, res) => {
     const rows = await readTodos("SQL_Liste_generale");
     res.setHeader("content-type", "application/json")  
     res.send(JSON.stringify(rows)) 
