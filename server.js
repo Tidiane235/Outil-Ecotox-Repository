@@ -136,6 +136,131 @@ app.get("/SQL_Liste_generale", async (req, res) => {
 
 
 
+//--------------------------- tables de l'outil
+//----------------------------------------------------------------------
+
+app.get("/SQL_Liste_substances", async (req, res) => {
+    const rows = await readTodos("SQL_Liste_substances");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+app.get("/SQL_Liste_generale", async (req, res) => {
+    const rows = await readTodos("SQL_Liste_generale");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+
+app.get("/SQL_toxicite_invertebres_aquatiques_COMPO", async (req, res) => {
+    const rows = await readTodos("SQL_toxicite_invertebres_aquatiques_COMPO");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+app.get("/SQL_toxicite_poissons_COMPO", async (req, res) => {
+    const rows = await readTodos("SQL_toxicite_poissons_COMPO");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+app.get("/SQL_criteres_de_qualite_sediments", async (req, res) => {
+    const rows = await readTodos("SQL_criteres_de_qualite_sediments");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+
+//---------------COMPOSES
+
+app.get("/SQL_proprites_physiques_et_chimiques_composes", async (req, res) => {
+    const rows = await readTodos("SQL_proprites_physiques_et_chimiques_composes");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+app.get("/SQL_criteres_de_qualite_eaux", async (req, res) => {
+    const rows = await readTodos("SQL_criteres_de_qualite_eaux");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+app.get("/SQL_criteres_de_qualite_sols", async (req, res) => {
+    const rows = await readTodos("SQL_criteres_de_qualite_sols");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+app.get("/SQL_ecotox_compose_organismes_aquatiques", async (req, res) => {
+    const rows = await readTodos("SQL_ecotox_compose_organismes_aquatiques");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+app.get("/SQL_ecotox_compose_organisme_terrestre", async (req, res) => {
+    const rows = await readTodos("SQL_ecotox_compose_organisme_terrestre");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+app.get("/import_ecotox", async (req, res) => {
+    const rows = await readTodos("import_ecotox");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+//---------------SUBSTANCES
+
+//----------------------------------------------------------------------------------------------
+
+app.get("/SQL_composition_substances", async (req, res) => {
+    const rows = await readTodos("SQL_composition_substances");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+app.get("/SQL_Propriete_physique_et_chimique_substance", async (req, res) => {
+    const rows = await readTodos("SQL_Propriete_physique_et_chimique_substance");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+app.get("/SQL_ecotox_substances_organismes_aquatiques", async (req, res) => {
+    const rows = await readTodos("SQL_ecotox_substances_organismes_aquatiques");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+app.get("/SQL_ecotox_substances_organisme_terrestre", async (req, res) => {
+    const rows = await readTodos("SQL_ecotox_substances_organisme_terrestre");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
 
 
 
