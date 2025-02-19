@@ -2563,7 +2563,7 @@ while (i < 10) {
             function IMPORTER(TABLE_DATA) {
             try{
          
-           fetch("http://localhost:8090/" + TABLE_DATA)
+           fetch("http://localhost:5070/" + TABLE_DATA)
             .then((response) => response.json())
             .then((tableau_importation)=> {
       
@@ -2576,7 +2576,7 @@ while (i < 10) {
               catch(e){ result.success= "Échec de l'importation"}
             
             }
-      
+            IMPORTER("SQL_Liste_generale")
             IMPORTER("table_ADORE_algues")
             IMPORTER("table_ADORE_poissons")
             IMPORTER("table_ADORE_invertebres")
