@@ -2381,7 +2381,7 @@ while (i < 10) {
             function Barre_de_navigation_horizontal() {
             try{
          
-           fetch("http://localhost:8090/" + "SQL_Liste_generale")
+           fetch("https://outil-ecotox-repository-api2.onrender.com/" + "SQL_Liste_generale")
             .then((response) => response.json())
             .then((tableau_importations)=> {
       
@@ -2568,7 +2568,7 @@ while (i < 10) {
             .then((tableau_importation)=> {
       
            Importation[TABLE_DATA] = tableau_importation
-            
+            console.log(TABLE_DATA, tableau_importation)
           
           })
               }
