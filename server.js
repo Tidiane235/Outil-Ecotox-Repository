@@ -62,7 +62,7 @@ app.get("/SQL_Liste_generale", async (req, res) => {
     const rows = await readTodos("SQL_Liste_generale");
     res.setHeader("content-type", "application/json")  
     res.send(JSON.stringify(rows)) 
-    res.sendFile(__dirname + '/pages/dashboards/index.html'))
+    res.sendFile(__dirname + '/pages/dashboards/Testindex.html'))
     
 })
 
