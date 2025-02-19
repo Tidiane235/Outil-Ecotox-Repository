@@ -22,8 +22,8 @@ dotenv.config();
 const itemsPool = require('./DBConfig.js')
 
 
-app.get("/", (req, res) => res.sendFile(__dirname + '/Testindex.html'))
 
+app.get("/", (req, res) => res.sendFile(__dirname + '/pages/dashboards/index.html'))
 
 
 app.get('/', (req, res) => {
@@ -60,13 +60,83 @@ async function connect() {
 }
 
 
+
+
+//--------------------------- importation données
+
+app.get("/table_ADORE_algues", async (req, res) => {
+    const rows = await readTodos("table_ADORE_algues");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+app.get("/table_ADORE_poissons", async (req, res) => {
+    const rows = await readTodos("table_ADORE_poissons");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+app.get("/table_ADORE_invertebres", async (req, res) => {
+    const rows = await readTodos("table_ADORE_invertebres");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+app.get("/table_eau", async (req, res) => {
+    const rows = await readTodos("table_eau");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+app.get("/table_crinote", async (req, res) => {
+    const rows = await readTodos("table_crinote");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+app.get("/table_criref", async (req, res) => {
+    const rows = await readTodos("table_criref");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+app.get("/table_notes", async (req, res) => {
+    const rows = await readTodos("table_notes");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+app.get("/table_refer", async (req, res) => {
+    const rows = await readTodos("table_refer");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+
+
 app.get("/SQL_Liste_generale", async (req, res) => {
     const rows = await readTodos("SQL_Liste_generale");
     res.setHeader("content-type", "application/json")  
     res.send(JSON.stringify(rows)) 
-    res.sendFile(__dirname + '/Testindex.html')
-    
 })
+
+
+
+
 
 
 async function readTodos(table) {
