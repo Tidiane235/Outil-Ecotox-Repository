@@ -33,6 +33,15 @@ app.get('/', (req, res) => {
     res.send('Test : OUTIL ECOTOX : Simple API homepage');
 })
 
+app.get("/SQL_Liste_generale", async (req, res) => {
+    const rows = await readTodos("SQL_Liste_generale");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+
 app.get('/api/items', (req, res) => {
     res.send('Sending a list of items FROM the DB ...')
 })
