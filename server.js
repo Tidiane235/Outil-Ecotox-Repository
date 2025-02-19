@@ -21,7 +21,9 @@ dotenv.config();
 
 const itemsPool = require('./DBConfig.js')
 
-app.get("/", (req, res) => res.sendFile(__dirname + '/pages/dashboards/index.html'))
+//app.get("/", (req, res) => res.sendFile(__dirname + '/pages/dashboards/index.html'))
+app.get("/", (req, res) => res.sendFile(__dirname + '/Testindex.html'))
+
 app.get('/', (req, res) => {
     res.send('Test : OUTIL ECOTOX14 : Simple API homepage');
 })
