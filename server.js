@@ -21,9 +21,9 @@ dotenv.config();
 
 const itemsPool = require('./DBConfig.js')
 
-app.get("/", (req, res) => res.sendFile('Outil-Ecotox-Repository/pages/dashboards/index.html'))
+app.get("/", (req, res) => res.sendFile('https://tidiane235.github.io/Outil-Ecotox-Repository/pages/dashboards/index.html'))
 app.get('/', (req, res) => {
-    res.send('Test : OUTIL ECOTOX8 : Simple API homepage');
+    res.send('Test : OUTIL ECOTOX9 : Simple API homepage');
 })
 
 
