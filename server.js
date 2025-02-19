@@ -22,7 +22,7 @@ dotenv.config();
 const itemsPool = require('./DBConfig.js')
 
 
-app.get("/", (req, res) => res.sendFile(__dirname + '/Testindex.html'))
+app.get("/", (req, res) => res.sendFile(__dirname + '/Testindex.html')
 
 app.get('/', (req, res) => {
     res.send('Test : OUTIL ECOTOX14 : Simple API homepage');
@@ -62,7 +62,7 @@ app.get("/SQL_Liste_generale", async (req, res) => {
     const rows = await readTodos("SQL_Liste_generale");
     res.setHeader("content-type", "application/json")  
     res.send(JSON.stringify(rows)) 
-    res.sendFile(__dirname + '/Testindex.html'))
+    res.sendFile(__dirname + '/Testindex.html')
     
 })
 
