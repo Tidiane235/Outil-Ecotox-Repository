@@ -26,7 +26,10 @@
                title="3 letter Password">
         <input type="submit" value="submit">
     </form>
-
+ <h2 id = "a">pattern attribute</h2>
+     <h2 id = "b"> pattern attribute</h2>
+     <h2 id = "c" >pattern attribute</h2>
+    
     <script >
         console.log("test page HTML")
 
@@ -42,6 +45,9 @@
       
            Importation[TABLE_DATA] = tableau_importation
             console.log(Importation[TABLE_DATA])
+                document.getElementById("a").innerHTML = Importation[TABLE_DATA][0].cas
+                document.getElementById("b").innerHTML = Importation[TABLE_DATA][0].nom_fr
+                document.getElementById("c").innerHTML = Importation[TABLE_DATA][0].categorie
           
           })
               }
