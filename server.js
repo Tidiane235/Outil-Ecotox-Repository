@@ -23,16 +23,8 @@ const itemsPool = require('./DBConfig.js')
 
 app.get("/", (req, res) => res.sendFile('https://tidiane235.github.io/Outil-Ecotox-Repository/pages/dashboards/index.html'))
 app.get('/', (req, res) => {
-    res.send('Test : OUTIL ECOTOX4 : Simple API homepage');
+    res.send('Test : OUTIL ECOTOX5 : Simple API homepage');
 })
-
-app.get("/SQL_Liste_generale", async (req, res) => {
-    const rows = await readTodos("SQL_Liste_generale");
-    res.setHeader("content-type", "application/json")  
-    res.send(JSON.stringify(rows)) 
-    
-})
-
 
 
 app.get('/api/items', (req, res) => {
@@ -42,19 +34,6 @@ app.post('/api/items', (req, res) => {
     res.status(201).send('Sent the new data TO the DB ...')
 })
 
-
-app.get('/api/SQL_Liste_generale', async(req, res) => {
-    try {
-        const allItems = await itemsPool.query(
-            "SELECT * FROM public.SQL_Liste_generale"
-        );
-        res.json({ allItems })
-        res.send(allItems)
-    } catch (error) {
-        console.log(error);
-        res.status(500).send(error.message)
-    }
-})
 
 app.listen(5070, () => {
     console.log("Test : Server running on port 5070");
