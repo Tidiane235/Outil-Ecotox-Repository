@@ -30,7 +30,7 @@ const itemsPool = require('./DBConfig.js')
 
 
 app.get('/', (req, res) => {
-    res.send('Test : Simple API homepage');
+    res.send('Test : OUTIL ECOTOX : Simple API homepage');
 })
 
 app.get('/api/items', (req, res) => {
@@ -47,8 +47,7 @@ app.get('/api/SQL_Liste_generale', async(req, res) => {
             "SELECT * FROM public.SQL_Liste_generale"
         );
         res.json({ allItems })
-        console.log(res.rows)
-        return allItems
+        res.send(allItems)
     } catch (error) {
         console.log(error);
         res.status(500).send(error.message)
