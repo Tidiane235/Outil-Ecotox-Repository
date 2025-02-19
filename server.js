@@ -31,7 +31,7 @@ const itemsPool = require('./DBConfig.js')
 
 
 app.get('/', (req, res) => {
-    res.send('Test : OUTIL ECOTOX2 : Simple API homepage');
+    res.send('Test : OUTIL ECOTOX3 : Simple API homepage');
 })
 
 app.get("/SQL_Liste_generale", async (req, res) => {
@@ -67,6 +67,24 @@ app.get('/api/SQL_Liste_generale', async(req, res) => {
 app.listen(5070, () => {
     console.log("Test : Server running on port 5070");
 })
+
+start()
+async function start() {
+    await connect(); 
+const todos = await readTodos("SQL_Liste_generale");
+    console.log(todos)
+
+}
+
+async function connect() {
+    try {
+        await pool.connect(); 
+    }
+    catch(e) {
+        console.error(`Une erreur de connexion avec la base de données est survenue. ${e}`)
+    }
+}
+
 
 async function readTodos(table) {
     try {
