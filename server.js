@@ -263,6 +263,92 @@ app.get("/SQL_ecotox_substances_organisme_terrestre", async (req, res) => {
 })
 
 
+app.post("/modification", async (req, res) => {
+    let result = {}
+    try{
+        const reqJson = req.body;
+        console.log("req modification : ", reqJson.table, reqJson.old, reqJson.new)
+
+        result.success = await updateTodos(reqJson.table, reqJson.old, reqJson.new)
+    }
+    catch(e){
+        result.success= "Échec de la modification (serveur)";
+    }
+    finally{
+        res.setHeader("content-type", "application/json")
+        res.send(JSON.stringify(result))
+    }
+   
+})
+
+
+async function updateTodos(table_sql, ancient_objet, nouvel_objet ){
+
+
+
+    Liste = Object.keys(ancient_objet).map((key) => [key, ancient_objet[key]])
+    colonnes = Object.keys(ancient_objet).map((key) => [key])
+    valeurs = Object.keys(ancient_objet).map((key) => [ancient_objet[key]])
+
+    console.log(colonnes)
+    console.log(valeurs)
+    nombre_de_colonnes = Liste.length
+    
+     //- Creer le filtre avec l'ancient objet
+     filtre = " WHERE "
+     i = 1
+     Liste.forEach(element =>{  
+        
+        if (i === nombre_de_colonnes){
+         filtre = filtre + element[0]  +" = "+ "'" + element[1] + "'"+ " "
+
+        }
+        if (i !== nombre_de_colonnes){ filtre = filtre + element[0] + " = "+ "'"+ element[1] +"'"+ " AND "
+
+        }
+
+        i = i + 1
+    
+    } )
+
+
+     //- Creer le changement avec le nouvel objet
+
+     Liste_2 = Object.keys(nouvel_objet).map((key) => [key, nouvel_objet[key]])
+     colonnes_2 = Object.keys(nouvel_objet).map((key) => [key])
+     valeurs_2 = Object.keys(nouvel_objet).map((key) => [nouvel_objet[key]])
+     nombre_de_colonnes2 = Liste_2.length
+     changement = " "
+     i = 1
+     Liste_2.forEach(element => {
+        
+        if (i === nombre_de_colonnes2){changement = changement + element[0] +" ="+"'"+ element[1]+"'"+" "}
+        
+        
+        if (i !== nombre_de_colonnes2){changement = changement + element[0] +" ="+"'"+ element[1]+"'"+", "}
+        i = i + 1
+     } ) 
+
+        //changement = " nom ='Camarche4', cas = '00-152' "
+        console.log(changement)
+        requete_finale = "update " + table_sql  + " set" + changement + filtre
+        console.log("requete finale de modification est : ", requete_finale)
+
+     try { 
+        await itemsPool.query(requete_finale);
+        return true
+       
+      }
+      catch(e){
+          return "Échec du test";
+      }
+        
+
+
+    
+}
+
+
 
 async function readTodos(table) {
     try {
