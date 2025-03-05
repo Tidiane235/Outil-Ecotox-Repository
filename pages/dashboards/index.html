@@ -2424,9 +2424,18 @@ while (i < 10) {
                     Utilisateur.symbole =  ligne_Filtre.symbole_formule
 
 
-                    document.getElementById("Haut_nom").innerHTML =   Utilisateur.nom 
-                    document.getElementById("Haut_cas").innerHTML =  Utilisateur.cas
-                    document.getElementById("Haut_symb").innerHTML = Utilisateur.symbole 
+                    
+        if(Utilisateur.nom && Utilisateur.nom !== "" && Utilisateur.nom !== "non disponible"  ){
+          document.getElementById("Haut_nom").innerHTML =  Utilisateur.nom
+        }
+        else { document.getElementById("Haut_nom").innerHTML =  Utilisateur.nom_En}
+       
+        
+        document.getElementById("Haut_cas").innerHTML =  Utilisateur.cas
+        document.getElementById("Haut_symb").innerHTML = Utilisateur.symbole 
+        document.getElementById("Haut_cat1").innerHTML = Utilisateur.type  
+        document.getElementById("Haut_cat2").innerHTML = Utilisateur.description  
+        document.getElementById("Haut_cat3").innerHTML = Utilisateur.description 
       
                     
                     document.getElementsByClassName('titre_section')[0].innerHTML = "Veuillez sélectionner un des mélanges complexes dans le tableau ci-dessus."
@@ -5166,7 +5175,7 @@ ligne_tableau.cas  === NORMALISER_CAS(ligne.cas_composé)
       
 
       
-      tests.innerHTML = `<p style ="font-size: 15px;"> <strong style = "color : hsl(288, 23%, 39%)">  (ph = ${Dureté_utilisateur.ph} / Dureté = ${Dureté_utilisateur.dureté} mg/L) =====> Calcule automatique pour le composé ${Nom_Auto} : VAFe = ${VAFe_calculée} mg/L, CVAA =  ${CVAA_calculé} mg/L, CVAC =  ${CVAC_calculé} mg/L (Annexe 12) </p>`
+      tests.innerHTML = `<p style ="font-size: 15px;"> <strong style = "color : hsl(288, 23%, 39%)">  (ph = ${Dureté_utilisateur.ph} / Dureté = ${Dureté_utilisateur.dureté} mg/L) =====> Calcul automatique des critères en fonction de la dureté moyenne pour le composé ${Nom_Auto} : VAFe = ${VAFe_calculée} mg/L, CVAA =  ${CVAA_calculé} mg/L, CVAC =  ${CVAC_calculé} mg/L (Annexe 12) </p>`
    
       if(DuMAX_utilisateur.value !== "" & DuMIN_utilisateur.value !== ""){
 
@@ -6858,9 +6867,18 @@ ligne_tableau.cas  === NORMALISER_CAS(ligne.cas_composé)
         
         Utilisateur = Selection_Utilisateur
 
-        document.getElementById("Haut_nom").innerHTML =   Utilisateur.nom 
+       
+        if(Utilisateur.nom && Utilisateur.nom !== "" && Utilisateur.nom !== "non disponible"  ){
+          document.getElementById("Haut_nom").innerHTML =  Utilisateur.nom
+        }
+        else { document.getElementById("Haut_nom").innerHTML =  Utilisateur.nom_En}
+       
+        
         document.getElementById("Haut_cas").innerHTML =  Utilisateur.cas
         document.getElementById("Haut_symb").innerHTML = Utilisateur.symbole 
+        document.getElementById("Haut_cat1").innerHTML = Utilisateur.type  
+        document.getElementById("Haut_cat2").innerHTML = Utilisateur.description  
+        document.getElementById("Haut_cat3").innerHTML = Utilisateur.description  
 
 
         Chargement_Page(Utilisateur)
