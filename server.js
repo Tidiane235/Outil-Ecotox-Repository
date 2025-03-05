@@ -262,6 +262,42 @@ app.get("/SQL_ecotox_substances_organisme_terrestre", async (req, res) => {
     
 })
 
+app.post("/todos", async (req, res) => {
+    let result = {}
+    try{
+        const reqJson = req.body;
+        result.success = await createTodo(reqJson.todo, reqJson.table)
+    }
+    catch(e){
+        result.success= "Échec de l'insertion (méthode POST)";
+    }
+    finally{
+        res.setHeader("content-type", "application/json")
+        res.send(JSON.stringify(result))
+    }
+   
+})
+
+
+app.post("/suppression", async (req, res) => {
+    let result = {}
+    try{
+
+        const reqJson = req.body
+        console.log("req suppression : ", reqJson.table, reqJson.supprimer)
+
+        result.success = await  deleteTodo(reqJson.table, reqJson.supprimer)
+    }
+    catch(e){
+        result.success=false;
+    }
+    finally{
+        res.setHeader("content-type", "application/json")
+        res.send(JSON.stringify(result))
+    }
+   
+})
+
 
 app.post("/modification", async (req, res) => {
     let result = {}
@@ -361,4 +397,81 @@ async function readTodos(table) {
         return [];
     }
 }
+
+
+async function createTodo(listetodos, table){
+    //------------------- Fonction pour générer une requête SQL "Insert" en chaînes de caractères ------------------
+    objet = listetodos
+    console.log("objet en cous de traitement", objet)
+    
+    Liste = Object.keys(objet).map((key) => [key, objet[key]])
+    nombre_de_colonnes = Liste.length
+
+    chiffre = '('
+
+    for(let i = 1; i <= nombre_de_colonnes; i ++) {
+    
+        if (i !== nombre_de_colonnes){
+            chiffre = chiffre + "$" + i + ","
+        }
+        console.log(chiffre)
+    
+        if (i === nombre_de_colonnes){
+            chiffre = chiffre + "$" + nombre_de_colonnes + ")"
+            console.log("Finale : ", chiffre)
+            break
+        }}
+
+        Requête_sql = "insert into " + table + " values"+ chiffre
+
+   
+
+//---------------------------------------------------------------------------------------------------------
+
+    try {
+        await itemsPool.query(Requête_sql, Object.values(listetodos));
+        return true
+        }
+        catch(e){
+            return "échec de l'insertion"
+        }
+
+}
+
+async function deleteTodo(table_sql, objet_à_supprimer){
+    
+    try {
+
+        objet = objet_à_supprimer
+        colonnes = Object.keys(objet).map((key) => [key])
+        nombre_de_colonnes = colonnes.length
+
+        req = "delete from table_35 where nom = $1 and cas = $2 and vafe = $3 and cvaa = $4 and cvac = $5" 
+        arg = ["niobium", "36546", "45", "23", "13"]
+
+        Requête_sql = "delete from " + table_sql + " where "
+        i = 1
+        colonnes.forEach(element =>{  
+        
+            if (i === nombre_de_colonnes){
+                Requête_sql = Requête_sql + element  +" = "+ "$"+ i 
+    
+            }
+            if (i !== nombre_de_colonnes){ Requête_sql = Requête_sql + element  +" = "+ "$"+ i + " and "
+    
+            }
+    
+            i = i + 1
+        
+        } )
+
+        console.log("requet SQL de suppression finale : ", Requête_sql, Object.values(objet))
+        await itemsPool.query(Requête_sql, Object.values(objet))
+        return true
+        }
+        catch(e){
+            return "Échec de la supression (serveur)";
+        }
+}
+
 
