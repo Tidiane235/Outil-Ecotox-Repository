@@ -4896,19 +4896,196 @@ if (tableau_criref_filtré && tableau_criref_filtré.length  !== 0  ){
         })
       
       
+      //--------- Pour les sols et les sédiments
+
+      chaine_moy_sol_sed = "Aucun critère de sol ou de sédiment disponible"
+      chaine_min_sol_sed = "Aucun critère de sol ou de sédiment disponible"
+      chaine_max_sol_sed = "Aucun critère de sol ou de sédiment disponible"
+
+      Crit_A = 'Non disponible'
+      Crit_B = 'Non disponible'
+      Crit_C = 'Non disponible'
+
+      Crit_cef = 'Non disponible'
+      Crit_ceo = 'Non disponible'
+      Crit_cep = 'Non disponible'
+      Crit_cer = 'Non disponible'
+      Crit_cse = 'Non disponible'
+
+
+      Crit_cefM = 'Non disponible'
+      Crit_ceoM = 'Non disponible'
+      Crit_cepM = 'Non disponible'
+      Crit_cerM = 'Non disponible'
+      Crit_cseM = 'Non disponible'
+
+      Chaine_crised = ""
+
+      IMPORTER('SQL_criteres_de_qualite_sols')
+      IMPORTER('SQL_criteres_de_qualite_sediments')
+
+      Importation["SQL_criteres_de_qualite_sols"]
+      Importation["SQL_criteres_de_qualite_sediments"]
+
+
+      if(Importation["SQL_criteres_de_qualite_sols"]){
+
+        
+        List_criteres_sols =  Importation["SQL_criteres_de_qualite_sols"].filter((ligne_ss)=>  (
+  ligne_ss.cas  === NORMALISER_CAS(ligne.cas_composé)
+   ) )
+
+      if(List_criteres_sols && List_criteres_sols.length !== 0){   
+        
+      Crit_A =  List_criteres_sols[0].valeur_critères_a
+      Crit_B =  List_criteres_sols[0].valeur_critères_b
+      Crit_C =  List_criteres_sols[0].valeur_critères_c
+
+
+         }
+
+   }
+
+
+if(Importation["SQL_criteres_de_qualite_sediments"]
+){
+
+
+
+   List_criteres_sed =     Importation['SQL_criteres_de_qualite_sediments'].filter((ligne_sed)=>  (
+  ligne_sed.cas  === NORMALISER_CAS(ligne.cas_composé) 
+   ) )
+
+function Couleurs_criteres_sol(valeur_reelC){
+
+  couleur_minS = ""
+  couleur_moyS = ""
+  couleur_maxS = ""
+  if ( ligne.valeur_moy === valeur_reelC ){couleur_moyS = "hsl(52, 100%, 50%)"
+            }
+            if ( ligne.valeur_moy > valeur_reelC){couleur_moyS = "hsl(0, 100%, 85%)"
+            }
+            if ( ligne.valeur_moy < valeur_reelC ){couleur_moyS = "hsl(114, 69%, 34%)"
+            }
+              
+
+            if ( ligne.valeur_min === valeur_reelC ){couleur_minS = "hsl(52, 100%, 50%)"
+            }
+            if ( ligne.valeur_min > valeur_reelC){couleur_minS = "hsl(0, 100%, 85%)"
+            }
+            if ( ligne.valeur_min < valeur_reelC ){couleur_minS = "hsl(114, 69%, 34%)"
+            }
+
+            if ( ligne.valeur_max === valeur_reelC ){couleur_maxS = "hsl(52, 100%, 50%)"
+            }
+            if ( ligne.valeur_max > valeur_reelC){couleur_maxS = "hsl(0, 100%, 85%)"
+            }
+            if ( ligne.valeur_max < valeur_reelC ){couleur_maxS = "hsl(114, 69%, 34%)"
+            }
+ return ([couleur_minS, couleur_moyS,couleur_maxS])
+
+}
+
+if(List_criteres_sed && List_criteres_sed.length !== 0 || List_criteres_sols && List_criteres_sols.length !== 0 ){ 
+
+
+
+  
+  if(List_criteres_sed && List_criteres_sed.length !== 0){ 
+    if( List_criteres_sed[0] &&  List_criteres_sed[0].length !== 0 ){
+    Crit_cefM = List_criteres_sed[0].valeur_cef
+      Crit_ceoM =  List_criteres_sed[0].valeur_ceo
+      Crit_cepM =  List_criteres_sed[0].valeur_cep
+      Crit_cerM =  List_criteres_sed[0].valeur_cer
+      Crit_cseM =  List_criteres_sed[0].valeur_cse}
+
+  if(List_criteres_sed[1] &&  List_criteres_sed[1].length !== 0 ){
+    Crit_cef = List_criteres_sed[1].valeur_cef
+      Crit_ceo =  List_criteres_sed[1].valeur_ceo
+      Crit_cep =  List_criteres_sed[1].valeur_cep
+      Crit_cer =  List_criteres_sed[1].valeur_cer
+      Crit_cse =  List_criteres_sed[1].valeur_cse}}
+ 
+
+       
+
       
+      Chaine_crised = ""
+      function chaines_criteres_sol_sediments (Indice){ 
+        
+      Chaine_crised =  ""
+
+      if(List_criteres_sols && List_criteres_sols.length !== 0){
+        Chaine_crised =   Chaine_crised + "  <br> [ " + `<strong style = "color :  ${Couleurs_criteres_sol(Crit_A)[Indice]}">  Critères de sols A   </strong>` + "   = "+ `${Crit_A}` + '  '+ "mg/kg ]" 
+      Chaine_crised =   Chaine_crised + "  <br> [ " + `<strong style = "color :  ${Couleurs_criteres_sol(Crit_B)[Indice]}">  Critères de sols B   </strong>` + "   = "+ `${Crit_B}` + '  '+ "mg/kg ]" 
+      Chaine_crised =   Chaine_crised + "  <br> [ " + `<strong style = "color :  ${Couleurs_criteres_sol(Crit_C)[Indice]}">  Critères de sols C   </strong>` + "   = "+  `${Crit_C}` + '  '+ "mg/kg ]" 
+      Chaine_crised =   Chaine_crised + "  <br> " 
+      Chaine_crised =   Chaine_crised + "  <br> Beaulieu, M. 2021. Guide d’intervention – Protection des sols et réhabilitation des terrains contaminés. Ministère de l’Environnement et de la lutte contre les changements climatiques, Québec, mai 2021, 326 p.  "
+
+      }
+     
+      if(List_criteres_sed[1] &&  List_criteres_sed[1].length !== 0 ){
+        Chaine_crised =   Chaine_crised + "  <br> [ " + `<strong style = "color :  ${Couleurs_criteres_sol(List_criteres_sed[1].valeur_cef)[Indice]}">  CEF   </strong>` + ' '+ List_criteres_sed[1].type_de_sédiments + ' '+ `${Crit_cef}` + ' '+ "mg/kg ]" 
+      Chaine_crised =   Chaine_crised + "  <br> [ " + `<strong style = "color :  ${Couleurs_criteres_sol(List_criteres_sed[1].valeur_ceo)[Indice]}">  CEO   </strong>` + ' '+ List_criteres_sed[1].type_de_sédiments + ' '+ `${Crit_ceo}` + ' '+ "mg/kg ]" 
+      Chaine_crised =   Chaine_crised + "  <br> [ " + `<strong style = "color :  ${Couleurs_criteres_sol(List_criteres_sed[1].valeur_cep)[Indice]}">  CEP   </strong>` + ' '+ List_criteres_sed[1].type_de_sédiments + ' '+ `${Crit_cep}` + ' '+ "mg/kg ]" 
+      Chaine_crised =   Chaine_crised + "  <br> [ " + `<strong style = "color :  ${Couleurs_criteres_sol(List_criteres_sed[1].valeur_cer)[Indice]}">  CER   </strong>` + ' '+ List_criteres_sed[1].type_de_sédiments + ' '+ `${Crit_cer}` + ' '+ "mg/kg ]" 
+      Chaine_crised =   Chaine_crised + "  <br> [ " + `<strong style = "color :  ${Couleurs_criteres_sol(List_criteres_sed[1].valeur_cse)[Indice]}">  CSE   </strong>` + ' '+ List_criteres_sed[1].type_de_sédiments + ' '+ `${Crit_cse}` + ' '+ "mg/kg ]" 
+      Chaine_crised =   Chaine_crised + "  <br> " 
+      }
+     
+       
+      if( List_criteres_sed[0] &&  List_criteres_sed[0].length !== 0 ){
+        Chaine_crised =   Chaine_crised + "  <br> [ " + `<strong style = "color :  ${Couleurs_criteres_sol(List_criteres_sed[0].valeur_cef)[Indice]}">  CEF   </strong>` + ' '+ List_criteres_sed[0].type_de_sédiments + ' '+ `${Crit_cefM}` + ' '+ "mg/kg ]" 
+      Chaine_crised =   Chaine_crised + "  <br> [ " + `<strong style = "color :  ${Couleurs_criteres_sol(List_criteres_sed[0].valeur_ceo)[Indice]}">  CEO   </strong>` + ' '+ List_criteres_sed[0].type_de_sédiments + ' '+ `${Crit_ceoM}` + ' '+ "mg/kg ]" 
+      Chaine_crised =   Chaine_crised + "  <br> [ " + `<strong style = "color :  ${Couleurs_criteres_sol(List_criteres_sed[0].valeur_cep)[Indice]}">  CEP   </strong>` + ' '+ List_criteres_sed[0].type_de_sédiments + ' '+ `${Crit_cepM}` + ' '+ "mg/kg ]" 
+      Chaine_crised =   Chaine_crised + "  <br> [ " + `<strong style = "color :  ${Couleurs_criteres_sol(List_criteres_sed[0].valeur_cer)[Indice]}">  CER   </strong>` + ' '+ List_criteres_sed[0].type_de_sédiments + ' '+ `${Crit_cerM}` + ' '+ "mg/kg ]" 
+      Chaine_crised =   Chaine_crised + "  <br> [ " + `<strong style = "color :  ${Couleurs_criteres_sol(List_criteres_sed[0].valeur_cse)[Indice]}">  CSE   </strong>` + ' '+ List_criteres_sed[0].type_de_sédiments + ' '+ `${Crit_cseM}` + ' '+ "mg/kg ]" 
+      Chaine_crised =   Chaine_crised + "  <br> " 
+      Chaine_crised =   Chaine_crised + "  <br> Environnement Canada et ministère du Développement durable, de l’Environnement et des Parcs du Québec, 2007. Critères pour l’évaluation de la qualité des sédiments au Québec et cadres d’application : prévention, dragage et restauration. 39 pages. "}
+      
+      }
+      
+      
+
+      chaines_criteres_sol_sediments (0)
+      chaine_min_sol_sed =  Chaine_crised
+
+      chaines_criteres_sol_sediments (1)
+      chaine_moy_sol_sed =  Chaine_crised
+
+      chaines_criteres_sol_sediments (2)
+      chaine_max_sol_sed  =  Chaine_crised
+
+
+     console.log( chaine_min_sol_sed)
+}
+
+
+}
+
+
       
         if (ligne.cas_composé){ 
       
-      rapport_min = document.createElement('div') 
-      rapport_min.innerHTML = `<p style ="font-size: 15px;"> <strong style = "font-size: 20px; color :  hsl(212, 65%, 63%)"> ${ligne.nom_composé} </strong>  ${ligne.cas_composé}  (${ligne.symbole_formule_composé}) :  <strong> valeur min :  ${ligne.valeur_min} mg/L </strong>  ${chaine_min} </p>`
+       rapport_min = document.createElement('div') 
+
+      if(ligne.unité === "mg/L" ){
+ rapport_min.innerHTML = "<br>" + `<p style ="font-size: 15px;"> <strong style = "font-size: 20px; color :  hsl(212, 65%, 63%)"> ${ligne.nom_composé} </strong>  ${ligne.cas_composé}  (${ligne.symbole_formule_composé}) :  <strong> valeur min :  ${ligne.valeur_min} mg/L </strong>  ${chaine_min} </p>`
+      }
+      else {rapport_min.innerHTML = "<br>" + `<p style ="font-size: 15px;"> <strong style = "font-size: 20px; color :  hsl(30, 100%, 25%)"> ${ligne.nom_composé} </strong>  ${ligne.cas_composé}  (${ligne.symbole_formule_composé}) :  <strong> valeur min :  ${ligne.valeur_min} mg/kg </strong>  ${chaine_min_sol_sed} </p>`}
+     
       zone_rapport.appendChild(rapport_min) 
       
       
-      tests = document.createElement('div') 
-      tests.innerHTML = `<p style ="font-size: 15px;">  <strong style = "font-size: 20px; color :  hsl(212, 65%, 63%)"> ${ligne.nom_composé} </strong>  ${ligne.cas_composé}   (${ligne.symbole_formule_composé}) :  <strong>  valeur moy :  ${ligne.valeur_moy} mg/L </strong>   ${chaine} </p>`
       
-      
+     tests = document.createElement('div') 
+
+      if(ligne.unité === "mg/L"){  tests.innerHTML = `<p style ="font-size: 15px;">  <strong style = "font-size: 20px; color :  hsl(212, 65%, 63%)"> ${ligne.nom_composé} </strong>  ${ligne.cas_composé}   (${ligne.symbole_formule_composé}) :  <strong>  valeur moy :  ${ligne.valeur_moy} mg/L </strong>   ${chaine} </p>`
+    }
+       else {tests.innerHTML  = `<p style ="font-size: 15px;"> <strong style = "font-size: 20px; color :  hsl(30, 100%, 25%)"> ${ligne.nom_composé} </strong>  ${ligne.cas_composé}  (${ligne.symbole_formule_composé}) :  <strong> valeur moy :  ${ligne.valeur_moy} mg/kg </strong>  ${chaine_moy_sol_sed} </p>`}
+        boutonecotox = document.createElement('div')
+        boutonecotox.innerHTML = "<br>" + `<button  class="btn bg-light mb-0 text-end" id =  ${ligne.nom_composé} type="button"> Données écotoxicologiques organismes aquatiques </button>` + "<br>"
+		
       tests.addEventListener("click", () => {
         
            document.getElementsByClassName('Paramètre_ecotox_formu')[0].style.display = "inline"
@@ -5020,10 +5197,12 @@ if (tableau_criref_filtré && tableau_criref_filtré.length  !== 0  ){
       chaine =""
       
       
+        
       rapport_max = document.createElement('div') 
-      rapport_max .innerHTML = `<p style ="font-size: 15px;"> <strong style = "font-size: 20px; color :  hsl(212, 65%, 63%)"> ${ligne.nom_composé} </strong>   ${ligne.cas_composé} (${ligne.symbole_formule_composé}) : <strong>  valeur max :  ${ligne.valeur_max} mg/L  </strong>   ${chaine_max}   </p>`
+      if(ligne.unité === "mg/L"){ rapport_max .innerHTML = `<p style ="font-size: 15px;"> <strong style = "font-size: 20px; color :  hsl(212, 65%, 63%)"> ${ligne.nom_composé} </strong>   ${ligne.cas_composé} (${ligne.symbole_formule_composé}) : <strong>  valeur max :  ${ligne.valeur_max} mg/L  </strong>   ${chaine_max}   </p>`}
+         else {rapport_max .innerHTML  = `<p style ="font-size: 15px;"> <strong style = "font-size: 20px; color :  hsl(30, 100%, 25%)"> ${ligne.nom_composé} </strong>  ${ligne.cas_composé}  (${ligne.symbole_formule_composé}) :  <strong> valeur max :  ${ligne.valeur_max} mg/kg </strong>  ${chaine_max_sol_sed} </p>`}
       zone_rapport.appendChild( rapport_max ) 
-      
+      zone_rapport.appendChild(   boutonecotox ) 
       
       }
       
