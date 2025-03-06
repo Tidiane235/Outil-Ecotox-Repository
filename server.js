@@ -176,6 +176,21 @@ app.get("/SQL_criteres_de_qualite_sediments", async (req, res) => {
     
 })
 
+app.get("/table_ecotoxDataset_result", async (req, res) => {
+    const rows = await readTodos("table_ecotoxDataset_result");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
+app.get("/table_ecotoxDataset_test", async (req, res) => {
+    const rows = await readTodos("table_ecotoxDataset_test");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
 
 
 //---------------COMPOSES
