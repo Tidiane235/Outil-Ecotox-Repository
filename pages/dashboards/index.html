@@ -5086,7 +5086,7 @@ if(List_criteres_sed && List_criteres_sed.length !== 0 || List_criteres_sols && 
         boutonecotox = document.createElement('div')
         boutonecotox.innerHTML = "<br>" + `<button  class="btn bg-light mb-0 text-end" id =  ${ligne.nom_composé} type="button"> Données écotoxicologiques organismes aquatiques </button>` + "<br>"
 		
-      tests.addEventListener("click", () => {
+      boutonecotox.addEventListener("click", () => {
         
            document.getElementsByClassName('Paramètre_ecotox_formu')[0].style.display = "inline"
    
