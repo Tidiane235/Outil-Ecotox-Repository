@@ -191,6 +191,14 @@ app.get("/table_ecotoxDataset_test", async (req, res) => {
     
 })
 
+app.get("/table_ecotoxdataset_species", async (req, res) => {
+    const rows = await readTodos("table_ecotoxdataset_species");
+    res.setHeader("content-type", "application/json")  
+    res.send(JSON.stringify(rows)) 
+    
+})
+
+
 
 
 //---------------COMPOSES
